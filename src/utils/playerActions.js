@@ -21,7 +21,11 @@ export const transferPlaybackHere = (accessToken, deviceId) => {
         Authorization: `Bearer ${accessToken}`
       }
     }
-  );
+  ).then(res => {
+    console.log('res++++', res)
+  }).catch(err => {
+     localStorage.setItem('premium_error',`${err}`);
+  });
 };
 
 export const onPrevClick = () => {

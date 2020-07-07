@@ -53,6 +53,7 @@ class Dashboard extends Component {
         cb(token);
       }
     });
+    
 
     this.player.on("player_state_changed", spotifyState => {
       getCurrentSong(spotifyState);
@@ -64,7 +65,7 @@ class Dashboard extends Component {
       const { device_id } = data;
       transferPlaybackHere(token, device_id);
     });
-
+    
     this.player.connect();
   };
 
@@ -82,7 +83,7 @@ class Dashboard extends Component {
             <MusicPlayer />
           </div>
         ) : (
-          <LoadingPage />
+          <LoadingPage dsError={this.props.dsError} />
         )}
       </div>
     );
@@ -91,7 +92,8 @@ class Dashboard extends Component {
 
 const mapStateToProps = state => ({
   dsSongsData: state.dsSongs.dsSongsData,
-  currentSongFetchingSuccess: state.currentSong.currentSongFetchingSuccess
+  currentSongFetchingSuccess: state.currentSong.currentSongFetchingSuccess,
+  dsError: state.dsSongs.dsSongsFetchingErr
 });
 
 export default connect(mapStateToProps, {
